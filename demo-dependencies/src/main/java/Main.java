@@ -1,4 +1,5 @@
 import a.b.CoreModule;
+import a.b.api.MyService;
 import a.b.spi.Module;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -21,6 +22,11 @@ public class Main {
 		System.out.println();
 		System.out.println("Strings:");
 		strings.forEach(System.out::println);
+
+		Set<MyService> services = injector.getInstance(Key.get(new TypeLiteral<Set<MyService>>(){}));
+		System.out.println();
+		System.out.println("Services:");
+		services.stream().map(MyService::getName).forEach(System.out::println);
 	}
 
 	private static Iterable<Module> loadModules() {
